@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reels Vault setup guide | Teamwide AI</title>
-<meta name="description" content="Turn your saved Instagram Reels into notes Claude can read. Every step tested.">
+<meta name="description" content="Connect Instagram once, then tell Claude to pull your saved Reels into notes. Every step tested.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,6 +63,8 @@ section>h2,.wrap>h2{font-size:clamp(32px,6vw,44px);line-height:1.1;margin-bottom
 button.cp{appearance:none;border:0;cursor:pointer;background:var(--action);color:var(--action-text);font:600 16px/1 var(--sans);padding:13px 22px;border-radius:999px;min-height:44px}
 button.cp:focus-visible{outline:3px solid var(--spark);outline-offset:2px}
 
+.warn{background:#fff6dc;border:1px solid #f0d98c;color:var(--ink);border-radius:16px;padding:16px 18px;margin:0 0 14px;font-size:16px;line-height:1.5}
+.warn b{font-weight:600}
 .truth{background:var(--trench);color:var(--foam);border-radius:24px;padding:28px 24px}
 .truth h2{font-size:clamp(30px,6vw,40px);line-height:1.1;margin-bottom:14px}
 .truth ul{margin:0;padding:0;list-style:none}
@@ -92,8 +94,8 @@ footer a{color:var(--foam)}
   <div class="wrap">
     <span class="brand"><img src="orb.png" alt="" width="34" height="34">Teamwide AI</span>
     <h1>Your saved Reels, <em>ready to ask.</em></h1>
-    <p>Give Claude a reel link. It saves every word, a picture from every second and the caption. Then you ask what you saved.</p>
-    <p class="credit">The free tool is <a href="https://github.com/Overusedhydra/reels-vault">Reels Vault</a>, made by Overusedhydra, not us. We installed and ran every step below ourselves on Nov 2, 2026.</p>
+    <p>Connect Instagram once. Then tell Claude to pull your newest saved reel. It saves every word, a picture from every second and the caption, and you can ask it anything.</p>
+    <p class="credit">This uses two free tools made by other people, not us: <a href="https://github.com/Overusedhydra/reels-vault">Reels Vault</a> and <a href="https://github.com/YoppaV/instagram-mcp">instagram-mcp</a>. We ran the steps below ourselves on Nov 2, 2026.</p>
     <p class="phone">On your phone? Send this page to your computer. Setup happens there.</p>
   </div>
 </header>
@@ -115,9 +117,9 @@ footer a{color:var(--foam)}
   <section>
     <h2>What you need</h2>
     <div class="need">
-      <div><b>Claude Code</b><span>On your computer. It does the install for you.</span></div>
-      <div><b>2 GB free</b><span>The first install took about 1.7 GB.</span></div>
-      <div><b>10 minutes</b><span>Only for setup, one time.</span></div>
+      <div><b>Claude Code</b><span>Or Codex. On your computer. It does the install for you.</span></div>
+      <div><b>2.5 GB free</b><span>For both tools and the browser they use.</span></div>
+      <div><b>15 minutes</b><span>Only for setup, one time.</span></div>
     </div>
   </section>
 
@@ -144,21 +146,40 @@ footer a{color:var(--foam)}
 
     <div class="step">
       <span class="n">Step 3</span>
-      <h3>Save more reels</h3>
-      <p>Copy a reel link on Instagram, then type this in Claude Code with your link after it.</p>
-      <div class="copy">
-<pre id="one">Save this reel: <mark>PASTE LINK</mark></pre>
-        <button class="cp" data-copy="one" type="button">Copy</button>
+      <h3>Connect your Instagram</h3>
+      <div class="warn">
+        <b>Read this first.</b> This step uses an unofficial tool. Instagram's rules ban automated access, so your account could get flagged. Use it only on your own account, pull a few reels at a time, and stop if Instagram shows a warning. You can skip this step and paste links instead.
       </div>
-      <p>Got a few? Do them together. Reels you already saved get skipped.</p>
       <div class="copy">
-<pre id="many">Save these reels: <mark>PASTE LINKS</mark></pre>
-        <button class="cp" data-copy="many" type="button">Copy</button>
+<pre id="connect">Install instagram-mcp from https://github.com/YoppaV/instagram-mcp using its README and add it to Claude Code. My Instagram username is <mark>YOUR USERNAME</mark>. Run the login step so a browser window opens and I can log in myself. Never ask for my password in this chat.</pre>
+        <button class="cp" data-copy="connect" type="button">Copy message</button>
       </div>
+      <p>A browser window opens. Log in there, not in the chat. Then close and reopen Claude Code.</p>
+      <p class="small">The tool only reads. It has no way to like, follow, comment or DM. It only talks to Instagram, and your login stays on your computer in a file that works like a password. The login lasts a few weeks. When it ends, ask Claude to run the login step again.</p>
     </div>
 
     <div class="step">
       <span class="n">Step 4</span>
+      <h3>Pull your saves</h3>
+      <p>No links needed. Just ask.</p>
+      <div class="copy">
+<pre id="pull">Pull my most recent saved reel and save it to Reels Vault.</pre>
+        <button class="cp" data-copy="pull" type="button">Copy</button>
+      </div>
+      <p>Want a few? Keep it small. We stay at 10 or less, and we don't run it twice in a row.</p>
+      <div class="copy">
+<pre id="pullmany">Pull my last 5 saved reels and save them to Reels Vault. Skip any already saved.</pre>
+        <button class="cp" data-copy="pullmany" type="button">Copy</button>
+      </div>
+      <p class="small">Skipped step 3? Copy a reel link on Instagram and use this.</p>
+      <div class="copy">
+<pre id="one">Save this reel: <mark>PASTE LINK</mark></pre>
+        <button class="cp" data-copy="one" type="button">Copy</button>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="n">Step 5</span>
       <h3>Ask your saves</h3>
       <p>This is the good part. Claude answers from your own notes.</p>
       <div class="copy">
@@ -177,11 +198,11 @@ footer a{color:var(--foam)}
     <div class="truth">
       <h2>Good to know</h2>
       <ul>
-        <li><b>You choose the reels.</b> <span>It does not pull your Saved folder by itself. You paste each link.</span></li>
-        <li><b>No Instagram login.</b> <span>You do not connect your account or type a password. Public reels worked with no login at all in our tests.</span></li>
-        <li><b>Public reels only.</b> <span>Private accounts will not work.</span></li>
-        <li><b>Built for Claude.</b> <span>The tool supports Claude Code, Claude Desktop and Cursor. It does not list ChatGPT.</span></li>
-        <li><b>Your notes stay with you.</b> <span>Words are written down on your own computer. It goes online to download the reel and to ask Shazam about the song.</span></li>
+        <li><b>It pulls when you ask.</b> <span>It does not run in the background. New saves come in when you tell Claude to pull them.</span></li>
+        <li><b>Reels only.</b> <span>Photos and carousels will not turn into notes. Reels from private accounts will not download.</span></li>
+        <li><b>Saving a reel needs no login.</b> <span>Only pulling your Saved list uses your Instagram login. Public reels saved with no login in our tests.</span></li>
+        <li><b>Works with Claude Code and Codex.</b> <span>Using Codex? Paste the same messages and say Codex instead of Claude Code. We tested saving and asking in Codex, but not the install or pulling your Saved list. The regular ChatGPT app can not do this.</span></li>
+        <li><b>Your notes stay with you.</b> <span>Words are written down on your own computer. It goes online to reach Instagram and to ask Shazam about the song.</span></li>
       </ul>
     </div>
   </section>
@@ -194,6 +215,8 @@ footer a{color:var(--foam)}
       <tr><td>Python 3.10+ required</td><td>Normal on most Macs. We hit this too. Tell Claude: install Python 3.12, then try again.</td></tr>
       <tr><td>ffmpeg or ffprobe not found</td><td>Tell Claude: install ffmpeg and ffprobe, then try again.</td></tr>
       <tr><td>Folder doesn't exist</td><td>Tell Claude: create the My Reels folder in Documents, then try again.</td></tr>
+      <tr><td>Executable doesn't exist</td><td>The browser is missing. We hit this too. Tell Claude: run playwright install chromium for instagram-mcp.</td></tr>
+      <tr><td>Session expired or not logged in</td><td>Tell Claude: run the instagram-mcp login step again, and log in yourself in the window.</td></tr>
       <tr><td>The download fails</td><td>Instagram sometimes blocks downloads. Log in to Instagram in Chrome, then tell Claude: try again with cookies from Chrome.</td></tr>
       <tr><td>Claude cannot find the tool in a new chat</td><td>Tell Claude: link the Reels Vault skill into my Claude skills folder.</td></tr>
     </table>
@@ -204,8 +227,8 @@ footer a{color:var(--foam)}
 <footer>
   <div class="wrap">
     <span class="brand"><img src="orb.png" alt="" width="34" height="34">Teamwide AI</span>
-    <p>Reels Vault is a free, MIT licensed project by <a href="https://github.com/Overusedhydra/reels-vault">Overusedhydra</a>. We are not connected to it, Instagram or Anthropic. Only save reels you have a right to keep notes on, and credit the creator if you quote one.</p>
-    <p>Tested on Nov 2, 2026 with Reels Vault 0.3.0.</p>
+    <p>Reels Vault is by <a href="https://github.com/Overusedhydra/reels-vault">Overusedhydra</a> and instagram-mcp is by <a href="https://github.com/YoppaV/instagram-mcp">YoppaV</a>. Both are free and MIT licensed. We are not connected to them, Instagram, Anthropic or OpenAI. You choose to use them and you are responsible for your own account. Credit the creator if you quote a reel.</p>
+    <p>Tested on Nov 2, 2026 with Reels Vault 0.3.0 and instagram-mcp f823788.</p>
   </div>
 </footer>
 
