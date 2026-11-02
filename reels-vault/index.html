@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reels Vault setup guide | Teamwide AI</title>
+<meta name="description" content="Turn your saved Instagram Reels into notes Claude can read. Every step tested.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --abyss:#030305;--trench:#011229;--deep:#013655;--current:#035a7e;--tide:#149cc1;--spark:#3ecbe9;
+  --action:#ffe08a;--action-text:#04202e;--foam:#e9fbff;--mist:#a3b8c2;--surface:#eaf7fb;--ink:#04202e;--slate:#46626f;
+  --line:rgba(4,32,46,.12);--gutter:clamp(20px,5vw,40px);
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Geist',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--ink);font:400 18px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:0 var(--gutter)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0}
+
+.hero{background:radial-gradient(120% 90% at 50% -10%,var(--deep) 0%,var(--trench) 52%,var(--abyss) 100%);color:var(--foam);padding:26px 0 76px}
+.brand{display:flex;align-items:center;gap:11px;font:500 17px/1 var(--sans);color:var(--foam);text-decoration:none}
+.brand img{width:34px;height:34px;display:block}
+.hero h1{font-size:clamp(42px,9vw,68px);line-height:1.03;margin:66px 0 22px}
+.hero h1 em{font-style:italic;color:var(--spark)}
+.hero p{font-size:clamp(19px,2.6vw,22px);line-height:1.45;color:var(--foam);margin:0;max-width:34em}
+.hero .credit{font-size:16px;color:var(--mist);margin-top:26px}
+.hero .credit a{color:var(--foam)}
+
+section{padding:64px 0 0}
+section>h2,.wrap>h2{font-size:clamp(32px,6vw,44px);line-height:1.1;margin-bottom:16px}
+.lede{color:var(--slate);margin:0 0 28px}
+
+.get{list-style:none;margin:0;padding:0;background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.get li{padding:18px 22px;border-top:1px solid var(--line)}
+.get li:first-child{border-top:0}
+.get b{display:block;font-weight:600}
+.get span{color:var(--slate);font-size:16px}
+
+.need{display:grid;gap:12px;grid-template-columns:repeat(3,1fr)}
+.need div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+.need b{display:block;font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.1;margin-bottom:6px}
+.need span{font-size:15px;color:var(--slate);line-height:1.35;display:block}
+
+.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px 24px;margin-top:16px}
+.step .n{font:italic 400 19px/1 var(--serif);color:var(--current);display:block;margin-bottom:8px}
+.step h3{font-size:29px;line-height:1.14;margin-bottom:10px}
+.step p{margin:0 0 14px}
+.step p:last-child{margin-bottom:0}
+.step .small{font-size:16px;color:var(--slate)}
+
+.copy{background:var(--trench);color:var(--foam);border-radius:16px;padding:18px 18px 14px;margin:0 0 14px}
+.copy pre{margin:0 0 14px;white-space:pre-wrap;word-break:break-word;font:400 16px/1.5 var(--mono)}
+.copy mark{background:none;color:var(--action)}
+button.cp{appearance:none;border:0;cursor:pointer;background:var(--action);color:var(--action-text);font:600 16px/1 var(--sans);padding:13px 22px;border-radius:999px;min-height:44px}
+button.cp:focus-visible{outline:3px solid var(--spark);outline-offset:2px}
+
+.truth{background:var(--trench);color:var(--foam);border-radius:24px;padding:28px 24px}
+.truth h2{font-size:clamp(30px,6vw,40px);line-height:1.1;margin-bottom:14px}
+.truth ul{margin:0;padding:0;list-style:none}
+.truth li{padding:13px 0;border-top:1px solid rgba(233,251,255,.14)}
+.truth li:first-child{border-top:0}
+.truth b{font-weight:600}
+.truth span{color:var(--mist)}
+
+.fix{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:16px}
+.fix th{font:600 15px/1.3 var(--sans);text-align:left;color:var(--slate);padding:13px 16px;background:#f6fcfe}
+.fix td{padding:14px 16px;border-top:1px solid var(--line);vertical-align:top}
+.fix td:first-child{font-weight:500;width:44%}
+
+footer{margin-top:72px;background:var(--abyss);color:var(--mist);padding:44px 0 56px;font-size:15px;line-height:1.5}
+footer p{margin:14px 0 0}
+footer a{color:var(--foam)}
+
+.hero .phone{display:none;background:var(--deep);color:var(--foam);border-radius:16px;padding:14px 18px;font-size:16px;margin-top:24px}
+@media (max-width:760px),(pointer:coarse){.hero .phone{display:block}}
+@media (max-width:520px){.need{grid-template-columns:1fr}.need b{font-size:24px}.step h3{font-size:27px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="brand"><img src="orb.png" alt="" width="34" height="34">Teamwide AI</span>
+    <h1>Your saved Reels, <em>ready to ask.</em></h1>
+    <p>Give Claude a reel link. It saves every word, a picture from every second and the caption. Then you ask what you saved.</p>
+    <p class="credit">The free tool is <a href="https://github.com/Overusedhydra/reels-vault">Reels Vault</a>, made by Overusedhydra, not us. We installed and ran every step below ourselves on Nov 2, 2026.</p>
+    <p class="phone">On your phone? Send this page to your computer. Setup happens there.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>What you get from each reel</h2>
+    <p class="lede">One note, saved on your computer. We tested a 57 second reel and got all of this in under 30 seconds.</p>
+    <ul class="get">
+      <li><b>Every word</b><span>The full transcript, with times.</span></li>
+      <li><b>A picture from every second</b><span>Up to 60, so Claude can see what was on screen.</span></li>
+      <li><b>The details</b><span>Creator, caption, hashtags, likes and comments.</span></li>
+      <li><b>The song</b><span>When Shazam can name it.</span></li>
+      <li><b>A topic folder</b><span>Hooks, sales, health, whatever you pick.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What you need</h2>
+    <div class="need">
+      <div><b>Claude Code</b><span>On your computer. It does the install for you.</span></div>
+      <div><b>2 GB free</b><span>The first install took about 1.7 GB.</span></div>
+      <div><b>10 minutes</b><span>Only for setup, one time.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Set it up</h2>
+    <p class="lede">We tested this on a Mac. The tool also lists Windows steps, but we did not test those.</p>
+
+    <div class="step">
+      <span class="n">Step 1</span>
+      <h3>Find a reel to test</h3>
+      <p>On Instagram, open any public reel. Tap share, then Copy link. Send the link to your computer.</p>
+    </div>
+
+    <div class="step">
+      <span class="n">Step 2</span>
+      <h3>Paste this into Claude Code</h3>
+      <div class="copy">
+<pre id="install">Install Reels Vault from https://github.com/Overusedhydra/reels-vault using the Claude Code steps in its README. Install anything that is missing, including Python 3.10 or newer, ffmpeg and ffprobe. Link its skill into my Claude skills folder. Keep my notes in a folder called My Reels in my Documents folder, and create that folder first. Then save this reel as a test: <mark>PASTE YOUR REEL LINK HERE</mark></pre>
+        <button class="cp" data-copy="install" type="button">Copy message</button>
+      </div>
+      <p>Swap the last part for your reel link. Then hit enter.</p>
+      <p class="small">Claude will ask to run a few commands. Say yes. The install took us under 3 minutes. The first save takes a bit longer, because it downloads the speech model one time.</p>
+    </div>
+
+    <div class="step">
+      <span class="n">Step 3</span>
+      <h3>Save more reels</h3>
+      <p>Copy a reel link on Instagram, then type this in Claude Code with your link after it.</p>
+      <div class="copy">
+<pre id="one">Save this reel: <mark>PASTE LINK</mark></pre>
+        <button class="cp" data-copy="one" type="button">Copy</button>
+      </div>
+      <p>Got a few? Do them together. Reels you already saved get skipped.</p>
+      <div class="copy">
+<pre id="many">Save these reels: <mark>PASTE LINKS</mark></pre>
+        <button class="cp" data-copy="many" type="button">Copy</button>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="n">Step 4</span>
+      <h3>Ask your saves</h3>
+      <p>This is the good part. Claude answers from your own notes.</p>
+      <div class="copy">
+<pre id="ask">What did I save about <mark>hooks</mark>? Give me the top 3 ideas and the links.</pre>
+        <button class="cp" data-copy="ask" type="button">Copy</button>
+      </div>
+      <p>To use the pictures too, ask this.</p>
+      <div class="copy">
+<pre id="look">Look at the frames from that reel. What did they show on screen in the first 3 seconds?</pre>
+        <button class="cp" data-copy="look" type="button">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="truth">
+      <h2>Good to know</h2>
+      <ul>
+        <li><b>You choose the reels.</b> <span>It does not pull your Saved folder by itself. You paste each link.</span></li>
+        <li><b>No Instagram login.</b> <span>You do not connect your account or type a password. Public reels worked with no login at all in our tests.</span></li>
+        <li><b>Public reels only.</b> <span>Private accounts will not work.</span></li>
+        <li><b>Built for Claude.</b> <span>The tool supports Claude Code, Claude Desktop and Cursor. It does not list ChatGPT.</span></li>
+        <li><b>Your notes stay with you.</b> <span>Words are written down on your own computer. It goes online to download the reel and to ask Shazam about the song.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>If something breaks</h2>
+    <p class="lede">Paste the error into Claude Code first. It can usually fix it. These are the ones to expect.</p>
+    <table class="fix">
+      <tr><th>What you see</th><th>What to do</th></tr>
+      <tr><td>Python 3.10+ required</td><td>Normal on most Macs. We hit this too. Tell Claude: install Python 3.12, then try again.</td></tr>
+      <tr><td>ffmpeg or ffprobe not found</td><td>Tell Claude: install ffmpeg and ffprobe, then try again.</td></tr>
+      <tr><td>Folder doesn't exist</td><td>Tell Claude: create the My Reels folder in Documents, then try again.</td></tr>
+      <tr><td>The download fails</td><td>Instagram sometimes blocks downloads. Log in to Instagram in Chrome, then tell Claude: try again with cookies from Chrome.</td></tr>
+      <tr><td>Claude cannot find the tool in a new chat</td><td>Tell Claude: link the Reels Vault skill into my Claude skills folder.</td></tr>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand"><img src="orb.png" alt="" width="34" height="34">Teamwide AI</span>
+    <p>Reels Vault is a free, MIT licensed project by <a href="https://github.com/Overusedhydra/reels-vault">Overusedhydra</a>. We are not connected to it, Instagram or Anthropic. Only save reels you have a right to keep notes on, and credit the creator if you quote one.</p>
+    <p>Tested on Nov 2, 2026 with Reels Vault 0.3.0.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('button.cp').forEach(function (b) {
+  var label = b.textContent;
+  b.addEventListener('click', function () {
+    var text = document.getElementById(b.dataset.copy).innerText;
+    var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = label; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+    } else { fallback(text); done(); }
+  });
+});
+function fallback(text) {
+  var t = document.createElement('textarea');
+  t.value = text; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+  document.body.appendChild(t); t.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(t);
+}
+</script>
+</body>
+</html>
